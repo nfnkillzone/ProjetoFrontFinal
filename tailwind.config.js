@@ -3,7 +3,13 @@ export default {
   content: ["./src/**/*.tsx",
   "./index.html"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        black: {
+          400: '#212121'
+        }
+      }
+    },
   },
   plugins: [],
 }
