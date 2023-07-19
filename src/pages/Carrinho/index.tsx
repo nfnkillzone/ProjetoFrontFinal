@@ -17,6 +17,7 @@ function Carrinho() {
                 </strong>
                 <p>Quantidade:X</p>
                 <p>Valor:R$:29,90</p>
+                <a href="#" className="text-base no-underline hover:underline ...">Remover</a>
               </div>
             </div>
           </div>
