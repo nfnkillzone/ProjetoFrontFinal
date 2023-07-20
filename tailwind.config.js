@@ -5,9 +5,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        yellow: {
+          400: '#FBC601'
+        },
         black: {
           400: '#212121'
         }
+        
       }
     },
   },
