@@ -34,7 +34,18 @@ export function Header() {
           </div>
           
           <div className=" font-serif hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-lg font-semibold leading-6  text-white">Entrar <span aria-hidden="true">&rarr;</span></a>
+            <Link 
+              to="/login"
+              className="text-lg font-semibold leading-6 text-white"
+            >
+              Entrar  <span aria-hidden="true">&rarr;</span>
+            </Link> 
+            <Link 
+              to="/carrinho"
+              className="text-lg font-semibold leading-6 text-white"
+            >
+              <ShoppingCart size={20} color="#FFF" weight="bold" />
+            </Link> 
           </div>
         </nav>
         
