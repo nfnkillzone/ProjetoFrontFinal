@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 export function Header() {
     return(
@@ -10,9 +11,24 @@ export function Header() {
             </a>
           </div>
           <div className="flex gap-10">
-          <a href="#" className="text-lg font-semibold leading-6 text-white">Home </a>
-          <a href="#" className="text-lg font-semibold leading-6  text-white">Carrinho </a>
-          <a href="#" className="text-lg font-semibold leading-6  text-white">Produtos </a> 
+            <Link 
+              to="/"
+              className="text-lg font-semibold leading-6 text-white"
+            >
+              Home
+            </Link>
+            <Link 
+              to="/"
+              className="text-lg font-semibold leading-6 text-white"
+            >
+              Carrinho 
+            </Link>
+            <Link 
+              to="/"
+              className="text-lg font-semibold leading-6 text-white"
+            >
+              Produtos
+            </Link> 
           </div>
           
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">

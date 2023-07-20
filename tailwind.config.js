@@ -7,7 +7,13 @@ export default {
       colors: {
         black: {
           400: '#212121'
-        }
+        },
+        brandgreen: {
+          400: '#345C64'
+        },
+        brandblue: {
+          300: '#70C5D7'
+        },
       }
     },
   },
