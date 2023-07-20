@@ -8,7 +8,7 @@ function Home() {
     <>
     <Header />
     
-    <div className="flex flex-wrap gap-2 w-[50%] ml-[40%] mt-[5%]">
+    <div className=" max-w-screen-2xl flex justify-center flex-wrap gap-2 mt-[20px]">
       {products.map ((produto) =>(
           <Card 
             key={produto.name}
