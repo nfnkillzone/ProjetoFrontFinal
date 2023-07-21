@@ -1,5 +1,6 @@
 import { Header } from "../../components/header";
-import { useCart, ICartItem } from "../../Context/CartContext";
+import { ICartItem } from "../../Context/CartContext";
+import{ useCart } from "../../hooks/useCart"
 
 function Carrinho() {
   const { cartItems, removeItemFromCart } = useCart();

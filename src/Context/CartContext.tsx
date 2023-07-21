@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { IProduct } from "../utils/types";
 
 export interface ICartItem extends IProduct {
@@ -11,15 +11,12 @@ export interface ICartContext {
   removeItemFromCart: (itemId: number) => void;
 }
 
-const CartContext = createContext<ICartContext>({
+export const CartContext = createContext<ICartContext>({
   cartItems: [],
   addToCart: () => {null},
   removeItemFromCart: () => {null},
 });
 
-export function useCart(): ICartContext {
-  return useContext(CartContext);
-}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);

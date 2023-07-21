@@ -5,7 +5,7 @@ import { getProduct } from "../../services/product.service";
 import toast, { Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 import { Loading } from "../../components/Loading";
-import { useCart } from "../../Context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 
 export default function Product() {
@@ -35,7 +35,7 @@ export default function Product() {
     if(!products && id){
       getProductsData(id);
     }
-},[products])
+},[products, id])
 
 const handleAddToCart = () => {
   if (products) {
