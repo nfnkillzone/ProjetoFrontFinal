@@ -5,6 +5,7 @@ import { getProduct } from "../../services/product.service";
 import toast, { Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 import { Loading } from "../../components/Loading";
+import { useCart } from "../../Context/CartContext";
 
 
 export default function Product() {
@@ -12,6 +13,7 @@ export default function Product() {
   const [errorRequest, setErrorRequest] = useState(false);
   const [products, setProducts] = useState<IProduct>();
   const {id} = useParams();
+  const { addToCart } = useCart();
 
   const getProductsData = (id:string) => {
     setLoading(true)
@@ -34,6 +36,13 @@ export default function Product() {
       getProductsData(id);
     }
 },[products])
+
+const handleAddToCart = () => {
+  if (products) {
+    addToCart(products);
+    toast.success("Produto adicionado ao carrinho!");
+  }
+};
 
   return (
     <div>
@@ -60,7 +69,8 @@ export default function Product() {
             <p className="text-lg italic">{products.price}</p>
             <p className="text-lg">{products.description}
             </p>
-            <button className="mt-[40px] bg-transparent hover:bg-black-400 text-black-400 font-semibold hover:text-white py-2 px-4 border border-black-400 hover:border-transparent rounded">
+            <button className="mt-[40px] bg-transparent hover:bg-black-400 text-black-400 font-semibold hover:text-white py-2 px-4 border border-black-400 hover:border-transparent rounded"
+            onClick={handleAddToCart}>
       Adicionar ao Carrinho
     </button>
             </div>
