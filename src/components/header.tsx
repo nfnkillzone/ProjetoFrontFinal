@@ -12,6 +12,7 @@ export function Header() {
               <img className="h-14 w-auto" src={logo} alt="Logo Site"/>
             </a>
           </div>
+          
           <div className="flex gap-10">
             <Link 
               to="/"
@@ -20,16 +21,10 @@ export function Header() {
               Home
             </Link>
             <Link 
-              to="/"
+              to="/carrinho"
               className="text-lg font-semibold leading-6 text-white"
             >
-              Carrinho 
-            </Link>
-            <Link 
-              to="/"
-              className="text-lg font-semibold leading-6 text-white"
-            >
-              Produtos
+              <ShoppingCart size={20} color="#FFF" weight="bold" />
             </Link> 
           </div>
           
@@ -38,14 +33,9 @@ export function Header() {
               to="/login"
               className="text-lg font-semibold leading-6 text-white"
             >
-              Entrar  <span aria-hidden="true">&rarr;</span>
-            </Link> 
-            <Link 
-              to="/carrinho"
-              className="text-lg font-semibold leading-6 text-white"
-            >
-              <ShoppingCart size={20} color="#FFF" weight="bold" />
-            </Link> 
+              Entrar <span aria-hidden="true">&rarr;</span>
+            </Link>
+            
           </div>
         </nav>
         
