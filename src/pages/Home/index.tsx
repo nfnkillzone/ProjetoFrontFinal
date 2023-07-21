@@ -47,10 +47,10 @@ function Home() {
         )}
         {!loading && !errorRequest && products.map ((produto) =>(
             <Card 
-              key={produto.name}
+              key={produto.id}
               name={produto.name} 
               preco={produto.price}
-              idProduct={produto.categoryId}
+              idProduct={produto.id}
               imageUrl={produto.image}
             />
         ))}
