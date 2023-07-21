@@ -51,6 +51,7 @@ function Home() {
               name={produto.name} 
               preco={produto.price}
               idProduct={produto.categoryId}
+              imageUrl={produto.image}
             />
         ))}
         {!loading && errorRequest && (
