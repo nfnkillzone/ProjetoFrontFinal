@@ -1,5 +1,5 @@
 import { userApi } from './api'
-import { userApiAdmin } from './api'
+
 
 
 export const loginNewUser = async (email: string, password: string) => {
@@ -9,8 +9,3 @@ export const loginNewUser = async (email: string, password: string) => {
 }
 
 
-export const loginAdmin = async (email: string, password: string) => {
-
-    const response = await userApiAdmin.post('/', { email, password })
-    return response.data;
-  };

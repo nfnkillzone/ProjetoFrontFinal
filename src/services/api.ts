@@ -7,7 +7,3 @@ export const api = axios.create({
 export const userApi = axios.create({
     baseURL: "http://164.92.97.48:3000/api/users/login",
 })
-
-export const userApiAdmin = axios.create({
-    baseURL: "http://164.92.97.48:3000/api/users/login",
-})

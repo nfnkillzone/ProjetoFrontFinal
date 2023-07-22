@@ -2,11 +2,10 @@ import { Link, useNavigate} from 'react-router-dom';
 import LogoPng from '../../assets/black_logo.png';
 import { useForm} from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginFormSchema, AdminLoginFormSchema } from './schema';
-import * as z from "zod";
+import { loginFormSchema } from './schema';
 import { AuthContext } from '../../Context/Auth'
-import {  useContext, useEffect, useState  } from 'react'
-import { loginNewUser,loginAdmin } from '../../services/login.service'
+import {  useContext, } from 'react'
+import { loginNewUser } from '../../services/login.service'
 
 interface AuthContextData {
   authenticated: boolean;
@@ -25,81 +24,36 @@ type  IUserInfo = {
 } 
 
 
-type TLoginFormInputs = z.infer<typeof loginFormSchema> & { isAdmin?: boolean };
+type TLoginFormInputs = {
+  email:string;
+  password:string;
+};
 
 export default function Login() {
-
-  
-  const { register,
+ const { register,
      handleSubmit, 
      formState: { isSubmitting, errors, }} = useForm<TLoginFormInputs>({
-      defaultValues: { isAdmin: true },
     resolver: zodResolver(loginFormSchema)
   });
 
-  const { userLogin, userAdmin, setToken } = useContext<AuthContextData>(AuthContext)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [ setResponse ] = useState<any>(null);
-    const isAdmin =userAdmin()
-    const navigate = useNavigate()
+  const { userLogin, setToken } = useContext<AuthContextData>(AuthContext)
+   const navigate = useNavigate();
 
-    useEffect(() => {
-      if (isAdmin) {
-        navigate('/')
-      }
-    },[isAdmin, navigate])
-
-  const submitLogin =  (data: TLoginFormInputs) => {
-    const adminFormValidation = AdminLoginFormSchema.safeParse(data)
-    if (!adminFormValidation.success) {
-      console.error ('Dados inválidos', adminFormValidation.error)
-      return
-    } 
   
-  if (adminFormValidation.data.isAdmin) {
-    loginAdmin(data.email, data.password)
-      .then((response) => {
-        console.log('Resposta da API de administradores:', response.data);
-        console.log(response.data)
-        const token = response.data.token
-        if (token) {
-          userLogin(data.email, data.password)
-          setToken(token)
-          localStorage.setItem('@userInfo', JSON.stringify({ emailUser: data.email, token }));
-           navigate('/');
+   const submitLogin = async (data: TLoginFormInputs) => {
+    try {
+      const response = await loginNewUser(data.email, data.password);
+      const token = response.token;
+      if (token) {
+        userLogin(data.email, data.password);
+        setToken(token);
+        localStorage.setItem('@userInfo', JSON.stringify({ emailUser: data.email, token }));
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Erro na chamada da API de login:', error);
     }
-      })
-      .catch((error) => {
-        console.error('Erro na chamada da API de Administradores:', error)
-      })
-  }
-
-  loginNewUser(data.email, data.password)
-  .then((response) => {
-    const token = response.data.token
-    if (token) {
-    userLogin(data.email, data.password)
-    setToken(token)  
-      localStorage.setItem('@userInfo', JSON.stringify({ emailUser: data.email, token }))
-       navigate('/')
-}
-
-setResponse(response)
-
-})
-.catch((error) => {
-
-if (error.response) {
-  if (error.response.status === 404) {
-    console.error('Usuário não encontrado')
-  }
-}
-});
-
-console.log('Dados enviados para a API de Usuarios', data)
-
-
-}
+  };
 
     return (
       <div className="bg-black-400 h-screen flex justify-center items-center">
