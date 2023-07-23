@@ -37,9 +37,11 @@ function Carrinho() {
           <p className="text-xl">Subtotal - R$: {calculateSubtotal(cartItems)}</p>
           <hr className="border-4 border-black-400 cursor-pointer hover:border-green-500 duration-500" />
           <p className="text-xl">Total - R$: {calculateTotal(cartItems)}</p>
+          <a href="/sucesso">
           <button className="w-[100%] bg-transparent hover:bg-green-500 text-black-400 font-semibold hover:text-white py-2 px-4 border border-black-400 hover:border-transparent rounded">
             CONCLUIR COMPRA
           </button>
+          </a>
         </div>
       </div>
     </div>

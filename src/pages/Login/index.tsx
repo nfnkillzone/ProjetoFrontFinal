@@ -6,6 +6,7 @@ import { loginFormSchema } from './schema';
 import { AuthContext } from '../../Context/Auth'
 import {  useContext, } from 'react'
 import { loginNewUser } from '../../services/login.service'
+import toast, { Toaster } from 'react-hot-toast';
 
 interface AuthContextData {
   authenticated: boolean;
@@ -51,7 +52,7 @@ export default function Login() {
         navigate('/');
       }
     } catch (error) {
-      console.error('Erro na chamada da API de login:', error);
+      toast.error("Esse usuário não existe")
     }
   };
 
@@ -130,6 +131,9 @@ export default function Login() {
             </p>
           </div>
         </div>
+        <Toaster
+        position="top-right"
+        reverseOrder={false}/>
       </div>
     )
 }
