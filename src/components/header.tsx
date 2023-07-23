@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from '../assets/LogoAmarela.png'
 import { ShoppingCart } from "@phosphor-icons/react";
+import { useContext } from 'react';
+import { AuthContext } from '../Context/Auth';
 
 export function Header() {
+  const { authenticated, userLogout } = useContext(AuthContext);
     return(
         <header className="bg-black-400">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-10 lg:px-8" aria-label="Global">
@@ -28,18 +31,24 @@ export function Header() {
             </Link> 
           </div>
           
-          <div className=" font-serif hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link 
+          <div className="font-serif hidden lg:flex lg:flex-1 lg:justify-end">
+      {authenticated ? (
+        <button
+          onClick={userLogout}
+          className="text-lg font-semibold leading-6 text-white cursor-pointer"
+        >
+              Sair
+            </button>
+          ) : (
+            <Link
               to="/login"
               className="text-lg font-semibold leading-6 text-white"
             >
               Entrar <span aria-hidden="true">&rarr;</span>
             </Link>
-            
-          </div>
-        </nav>
-        
-      </header>
-         
-    )
+          )}
+        </div>
+      </nav>
+    </header>
+  );
 }

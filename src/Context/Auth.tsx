@@ -1,4 +1,8 @@
-export interface AuthContextData {
+import  { ReactNode, createContext, useState  } from "react"
+import { useNavigate } from "react-router-dom"
+  
+  
+  export interface AuthContextData {
     authenticated: boolean;
     user: IUserInfo | null;
     token: string | null;
@@ -14,21 +18,19 @@ export interface AuthContextData {
     isAdmin: boolean
   } 
     
-  import  { ReactNode, createContext, useState  } from "react"
-  import { useNavigate } from "react-router-dom"
+  
   
   
   export const AuthContext = createContext<AuthContextData>({
       authenticated: false,
       user: null,
       token: null,
-      
-      setToken: () => {null},
-      
-      userLogin: () => {null},
-      
-      userLogout: () => {null},
-      
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      setToken: () => {},
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      userLogin: () => {},
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      userLogout: () => {},
       userAdmin: () => false,
     });
   
@@ -37,6 +39,7 @@ export interface AuthContextData {
       const navigate = useNavigate() 
       const [ user, setUser] = useState<IUserInfo | null >(null) // userState com usuario iniciando nulo
       const [token, setToken] = useState<string | null>(null)
+      const authenticated = !!user;
       
   
       const userLogin = (email: string, password: string) => {
@@ -44,6 +47,7 @@ export interface AuthContextData {
           const tokenFromAPI = 'TOKEN_FROM_API'
           setUser({password, email, isAdmin: true})
           setToken(tokenFromAPI)
+          
           
       }
   
@@ -55,7 +59,7 @@ export interface AuthContextData {
           console.log('Logout')
           setUser(null)
           setToken(null)
-          navigate('/login')
+          navigate('/')
       }
   
       const updateToken = (newToken: string | null) => {
@@ -64,14 +68,17 @@ export interface AuthContextData {
   
       return(
           
-          <AuthContext.Provider 
-          value = {{authenticated: !!user, 
-                    user,
-                    token,
-                    setToken: updateToken,
-                    userLogin,
-                    userLogout,
-                    userAdmin }}>
+        <AuthContext.Provider
+        value={{
+          authenticated,
+          user,
+          token,
+          setToken: updateToken,
+          userLogin,
+          userLogout,
+          userAdmin,
+        }}
+      >
            {children}   
           </AuthContext.Provider>
           

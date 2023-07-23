@@ -4,10 +4,13 @@ import Login from "../pages/Login";
 import Carrinho from "../pages/Carrinho";
 import Product from "../pages/Product";
 import Register from "../pages/Register";
+import { AuthProvider } from "../Context/Auth";
+
 export default function Router(){
 
     return (
         <BrowserRouter>
+        <AuthProvider>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/product/:id" element={<Product/>}/>
@@ -15,6 +18,7 @@ export default function Router(){
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/carrinho" element={<Carrinho/>}/>
             </Routes>
+            </AuthProvider>
         </BrowserRouter>
     )
 }

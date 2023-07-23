@@ -5,10 +5,11 @@ import Router from "./routes/index.router"
 function App() {
   
   return (
-   
+  
   <CartProvider>
     <Router/>
    </CartProvider>
+   
   
   )
 }
