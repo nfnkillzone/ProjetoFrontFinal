@@ -52,7 +52,7 @@ export default function Login() {
         navigate('/');
       }
     } catch (error) {
-      toast.error("Esse usuário não existe")
+      toast.error("Email ou password incorreto")
     }
   };
 
